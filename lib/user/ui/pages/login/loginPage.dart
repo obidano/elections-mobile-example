@@ -1,6 +1,6 @@
+import 'package:elections/pages/periodes/periodePage.dart';
 import 'package:flutter/material.dart';
 
-import '../periodes/periodePage.dart';
 
 class LoginPage extends StatelessWidget{
   @override
