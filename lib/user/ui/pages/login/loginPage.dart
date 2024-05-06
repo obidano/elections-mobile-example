@@ -1,15 +1,22 @@
 import 'package:elections/pages/periodes/periodePage.dart';
+import 'package:elections/user/ui/pages/login/loginCtrl.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class LoginPage extends StatelessWidget{
+class LoginPage extends ConsumerWidget{
+  var login=TextEditingController();
+  var password=TextEditingController();
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var state=ref.watch(loginCtrlProvider);
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           children: [
+            if(state) CircularProgressIndicator(),
             _logo(),
             SizedBox(height: 50),
             _titreText(),
@@ -18,7 +25,7 @@ class LoginPage extends StatelessWidget{
             SizedBox(height: 10),
             _passwordField(),
             SizedBox(height: 30),
-            _validerBtn(context)
+            _validerBtn(context, ref)
           ],
         )
       )
@@ -44,6 +51,7 @@ class LoginPage extends StatelessWidget{
 
   Widget _usernameField(){
     return TextField(
+      controller: login,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: "Nom d'utilisateur",
@@ -54,6 +62,7 @@ class LoginPage extends StatelessWidget{
 
   Widget _passwordField(){
     return TextField(
+        controller: password,
         obscureText: true,
         decoration: InputDecoration(
             border: OutlineInputBorder(),
@@ -64,7 +73,7 @@ class LoginPage extends StatelessWidget{
     );
   }
 
-  Widget _validerBtn(BuildContext context){
+  Widget _validerBtn(BuildContext context, WidgetRef ref){
     return   Container(
         width: double.infinity,
         height: 50,
@@ -75,9 +84,20 @@ class LoginPage extends StatelessWidget{
               backgroundColor: Colors.deepOrange,
               foregroundColor: Colors.white
           ),
-          onPressed: (){
-            Navigator.push(context,
-                MaterialPageRoute(builder:(ctx)=> PeriodePage() ));
+          onPressed: () async{
+            print("login ${login.text}");
+            print("password ${password.text}");
+            var ctrl=ref.read(loginCtrlProvider.notifier);
+            Map<String, String> data={
+              "username": login.text,
+              "mot_de_passe": password.text
+            };
+            var res=await ctrl.soumettreFormulaire(data);
+            if(res){
+              Navigator.push(context,
+                  MaterialPageRoute(builder:(ctx)=> PeriodePage() ));
+            }
+
           },
           icon: Icon(Icons.check),
           label: const Text('Demarrer', style:TextStyle(fontSize: 20)),
