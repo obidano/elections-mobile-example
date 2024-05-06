@@ -1,4 +1,3 @@
-import 'package:elections/pages/login/loginPage.dart';
 import 'package:flutter/material.dart';
 
 class IntroPage extends StatelessWidget{
@@ -36,8 +35,8 @@ class IntroPage extends StatelessWidget{
                 foregroundColor: Colors.white
               ),
               onPressed: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder:(ctx)=> LoginPage() ));
+                /*Navigator.push(context,
+                    MaterialPageRoute(builder:(ctx)=> LoginPage() ));*/
               },
               icon: Icon(Icons.check),
               label: const Text('Demarrer', style:TextStyle(fontSize: 20)),
