@@ -3,12 +3,14 @@ import 'package:elections/user/business/model/user/CreateUserRequest.dart';
 import 'package:elections/user/business/model/user/UpdateUserRequest.dart';
 import 'package:elections/user/business/model/user/User.dart';
 import 'package:elections/user/business/service/UserNetworkService.dart';
+import 'package:uuid/uuid.dart';
 
 class UserNetworkServiceImplV1 implements UserNetworkService{
   @override
-  Future<String> authenticate(data) {
-    // TODO: implement authenticate
-    throw UnimplementedError();
+  Future<String> authenticate(data) async {
+    var token=Uuid().v1();
+    await Future.delayed(Duration(seconds: 2));
+    return  token;
   }
 
   @override

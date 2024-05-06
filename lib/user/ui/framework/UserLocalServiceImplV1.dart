@@ -24,9 +24,10 @@ class UserLocalServiceImplV1 implements UserLocalService{
   }
 
   @override
-  Future saveToken(token) {
-    // TODO: implement saveToken
-    throw UnimplementedError();
+  Future saveToken(token) async {
+    print("Token sauvegardé");
+    await Future.delayed(Duration(seconds: 1));
+    return;
   }
 
   @override

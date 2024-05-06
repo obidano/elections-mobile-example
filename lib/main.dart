@@ -2,6 +2,7 @@ import 'package:elections/pages/intro/introPage.dart';
 import 'package:elections/user/business/interactors/UserInteractor.dart';
 import 'package:elections/user/ui/framework/UserLocalServiceImplV1.dart';
 import 'package:elections/user/ui/framework/UserNetworkServiceImplV1.dart';
+import 'package:elections/user/ui/pages/login/loginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,7 +26,7 @@ class MonApplication extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: IntroPage()
+      home: LoginPage()
     );
   }
 
